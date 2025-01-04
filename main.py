@@ -8,7 +8,8 @@ def display():
           "2. Remove Password\n"
           "3. Update Password\n"
           "4. Show all my Passwords\n"
-          "5. Exit"
+          "5. Open your passwords file\n"
+          "6. Exit"
           )
 
 def show():
@@ -102,13 +103,18 @@ def update():
                     i[1] = input("Enter a New Password :").lower()
                     break
 
+def open_file():
+    with open("My Passwords.txt", 'a') as f:
+        for i in name_pass_list:
+            f.write(f"App: {i[0]} | Password: {i[1]}" + "\n")
+    print("Your file is created/opened")
 
 # Function to hash the master password
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
 def verify_master_password():
-    stored_master_password_hash = hash_password("Here") # Replace with your actual master password
+    stored_master_password_hash = hash_password("oussama") # Replace with your actual master password
     while True:
         master_password = input("Enter master password: ")
         if hash_password(master_password) == stored_master_password_hash:
@@ -119,12 +125,20 @@ def verify_master_password():
 
 verify_master_password()
 # Call the function
+display()
 while True:
-    display()
-    choice = int(input("Choose: "))
+    try:
+        choice = int(input("Choose: "))
+        if choice not in range(1, 7):
+            continue
+    except:
+        print("Invalid input!")
+        continue
+
     match choice:
         case 1: add()
         case 2: Remove()
         case 3: update()
         case 4: show()
-        case 5: quit()
+        case 5: open_file()
+        case 6: quit()
