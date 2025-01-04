@@ -108,7 +108,7 @@ def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
 def verify_master_password():
-    stored_master_password_hash = hash_password("oussama") # Replace with your actual master password
+    stored_master_password_hash = hash_password("Here") # Replace with your actual master password
     while True:
         master_password = input("Enter master password: ")
         if hash_password(master_password) == stored_master_password_hash:
