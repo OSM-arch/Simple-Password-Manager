@@ -1,5 +1,4 @@
 import hashlib
-from random import choice
 
 name_pass_list = []
 
